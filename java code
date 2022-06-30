@@ -1,0 +1,101 @@
+package com.example.demo1;
+
+import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.Separator;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.TilePane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
+
+
+public class StudentInformation extends Application{
+    ComboBox<Integer> cmboCourses;
+
+    Label response = new Label();
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage myStage) throws Exception {
+        // TODO Auto-generated method stub
+        Font font = Font.font("verdana", FontWeight.NORMAL, FontPosture.REGULAR, 20);
+
+
+        myStage.setTitle("Student Information");
+
+        TilePane rootNode = new TilePane();
+
+        rootNode.setAlignment(Pos.CENTER);
+
+        Scene myScene = new Scene(rootNode, 1110, 490);
+
+        myStage.setScene(myScene);
+
+        Label lblheader = new Label("Branch Selection");
+        lblheader.setFont(font);
+        lblheader.setTextFill(Color.BLUE);
+
+        Separator sp = new Separator();
+        sp.setMaxSize(1110, 480);
+
+        response = new Label();
+        response.setFont(font);
+        response.setTextFill(Color.BROWN);
+
+        String courses[] = { "Computer Science Engineering", "Mechanical Engineering", "Civil Engineering",  "Cemical Engineering", "Elecrical Engineering","Elecronics Engeering" };
+        ComboBox cmbx_course = new ComboBox (FXCollections.observableArrayList(courses));
+        String years[] = { "2018", "2019", "2020",  "2021", "2022","2023" };
+        ComboBox cmbx_year = new ComboBox (FXCollections.observableArrayList(years));
+
+        cmbx_course.setValue("--Select--");
+        cmbx_year.setValue("--Select--");
+        cmbx_course.setEditable(true);
+        cmbx_year.setEditable(true);
+
+
+        cmbx_course.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent ae) {
+                response.setText("You have selected: " + cmbx_course.getValue()+" "+"course");
+            }
+        });
+        //USN, Name, Academic year, Branch, company Name, Pay Package, No_of_offers
+
+        Label lblusn = new Label("USN");
+        Label lblname = new Label("Name");
+        Label lblacademicyear = new Label("Academic year");
+        Label lblbranch = new Label("Branch");
+        Label lblcompanyname = new Label("Company Name");
+        Label lblpaypackage = new Label("Pay Package");
+        Label lblnoofoffers = new Label("No of offers");
+
+
+        TextField txtusn = new TextField();
+        TextField txtname = new TextField();
+        TextField txtacademicyear = new TextField();
+        TextField txtbranch = new TextField();
+        TextField txtcompanyname = new TextField();
+        TextField txtpaypackage = new TextField();
+        TextField txtnoofoffers = new TextField();
+
+        rootNode.getChildren().addAll(lblusn,txtusn,lblname,txtname,lblacademicyear,txtacademicyear,
+                lblbranch,txtbranch,lblcompanyname,txtcompanyname,lblpaypackage,txtpaypackage,lblnoofoffers,txtnoofoffers,
+                lblheader,sp,new Separator(),new Separator(),cmbx_course, response,cmbx_year);
+
+
+        myStage.show();
+    }
+
+}
